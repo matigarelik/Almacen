@@ -1,0 +1,27 @@
+{% extends "AppAlmacen/padre.html" %}
+{% load static %}
+
+{% block titulo %}Buscar{% endblock titulo %}
+{% block header %}BUSCAR CLIENTES{% endblock header %}
+{% block contenidoquecambia %}{% endblock contenidoquecambia %}
+
+{% block formulario %}
+<h2>Buscar Clientes</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+            <input type="text" name="nombre" placeholder="Buscar por nombre...">
+            <input type="submit" value="Buscar">
+</form>
+
+{% if clientes %}
+    <h3>Clientes encontrados:</h3>
+    <ul>
+        {% for cliente in clientes %}
+       <li>Nombre: {{cliente.nombre}} | email: {{cliente.email}} | Teléfono: {{cliente.telefono}}  </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No se encontraron clientes.</p>
+{% endif %}
+
+{% endblock formulario %}

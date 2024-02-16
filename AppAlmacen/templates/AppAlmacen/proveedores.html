@@ -1,0 +1,17 @@
+{% extends "AppAlmacen/padre.html" %}
+{% load static %}
+
+{% block titulo %}Proveedores{% endblock titulo %}
+{% block header %}PROVEEDORES{% endblock header %}
+{% block contenidoquecambia %}{% endblock contenidoquecambia %}
+
+{% block formulario %}
+<h2>Ingresar Productos</h2>
+    <form action="{% url 'proveedores' %}" method="POST">
+        {% csrf_token %}
+       <table>
+        {{ form.as_table }}
+       </table>
+        <input type="submit" value="Enviar">
+    </form>
+{% endblock formulario %}
