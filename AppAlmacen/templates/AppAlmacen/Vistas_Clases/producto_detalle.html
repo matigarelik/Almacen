@@ -1,0 +1,17 @@
+{% extends "AppAlmacen/padre.html" %}
+
+{% load static %}
+
+
+{% block title %} Inicio {% endblock title %}
+
+{% block contenidoquecambia %}
+
+<p>Producto: <i>{{ producto.nombre }}</i></p>
+<p>Detalles: <i>{{ producto.descripcion }}</i></p>
+
+<p>
+    <a href="{% url 'List' %}">Regresar</a>
+</p>
+
+{% endblock contenidoquecambia %}
