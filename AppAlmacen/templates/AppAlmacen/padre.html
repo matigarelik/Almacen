@@ -26,7 +26,15 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'buscar' %}">Buscar</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'productos' %}">Productos</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                            <li><a class="dropdown-item" href="#">Editar Productos</a></li>
+                            <!-- Agrega otros elementos del submenú aquí si es necesario -->
+                        </ul>
+                    <!--<li class="nav-item"><a class="nav-link" href="{% url 'productos' %}">Productos</a></li>-->
                     <li class="nav-item"><a class="nav-link" href="{% url 'proveedores' %}">Proveedores</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'clientes' %}">Clientes</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
