@@ -22,7 +22,7 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                return render(request, "AppCoder/index.html")
+                return render(request, "AppAlmacen/index.html")
 
         msg_login = "Usuario o contraseña incorrectos"
 
@@ -39,7 +39,7 @@ def register(request):
             # Si los datos ingresados en el form son válidos, con form.save()
             # creamos un nuevo user usando esos datos
             form.save()
-            return render(request,"AppCoder/index.html")
+            return render(request,"AppAlmacen/index.html")
         
         msg_register = "Error en los datos ingresados"
 
@@ -85,7 +85,7 @@ def edit(request):
                     avatar.imagen = informacion["imagen"]
                     avatar.save()
 
-                return render(request, "AppCoder/index.html")
+                return render(request, "AppAlmacen/index.html")
 
     else:
         datos = {

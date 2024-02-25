@@ -7,7 +7,7 @@
 
 {% block formulario %}
 <h2>Ingresar Productos</h2>
-    <form action="{% url 'proveedores' %}" method="POST">
+    <form action="{% url 'AlmacenProveedores' %}" method="POST">
         {% csrf_token %}
        <table>
         {{ form.as_table }}
