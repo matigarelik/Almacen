@@ -1,15 +1,16 @@
 {% extends "AppAlmacen/padre.html" %}
-
 {% load static %}
-
 
 {% block title %} Inicio {% endblock title %}
 
 {% block contenidoquecambia %}
 
-NOMBRE: {{ producto.nombre }}<br>
-<button type="button" class="btn btn-dark"><a href="{% url 'List' %}">Regresar</a></button>
+    <form action="" method="POST">
+        {% csrf_token %}
 
-</p>
+        {{ form.as_p }}
+        <input type="submit" value="Enviar">
+
+    </form>
 
 {% endblock contenidoquecambia %}

@@ -7,9 +7,11 @@
 
 {% block contenidoquecambia %}
 
-NOMBRE: {{ producto.nombre }}<br>
-<button type="button" class="btn btn-dark"><a href="{% url 'List' %}">Regresar</a></button>
+<p>Producto: <i>{{ cliente.nombre }}</i></p>
+<p>Detalles: <i>{{ cliente.email }}</i></p>
 
+<p>
+    <a href="{% url 'List' %}">Regresar</a>
 </p>
 
 {% endblock contenidoquecambia %}

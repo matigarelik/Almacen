@@ -1,27 +1,26 @@
 # AppAlmacen/urls.py
 from django.urls import path
 from AppAlmacen import views
-from AppAlmacen import views_clases
 
 urlpatterns = [
     path('', views.home, name="home"),
-    #path('about/', views.about, name="About")
+    path('about/', views.about, name="About")
 ]
 
 urlpatterns += [
-    #path('', views.home, name='home'),
-    path('almacen-productos/', views.productos, name='AlmacenProductos'),
-    path('almacen-proveedores/', views.proveedores, name='AlmacenProveedores'),
-    path('almacen-clientes/', views.clientes, name='AlmacenClientes'),
-    path('almacen-buscar/', views.buscar, name='AlmacenBuscar'), ### ACA ESTA BUSCAR!!!!
+    path('cliente-list/', views.ClienteListView.as_view(), name='ClienteList'),
+    path('cliente-detail/<int:pk>/', views.ClienteDetailView.as_view(), name='ClienteDetail'),
+    path('cliente-new/', views.ClienteCreateView.as_view(), name='ClienteNew'),
+    path('cliente-edit/<int:pk>', views.ClienteUpdateView.as_view(), name='ClienteEdit'),
+    path('cliente-delete/<int:pk>', views.ClienteCreateView.as_view(), name='ClienteDelete')
     
 ]
-
+# Producto
 urlpatterns += [
-    path('producto-list/', views_clases.ProductoListView.as_view(), name='List'),
-    path('producto-detail/<int:pk>/', views_clases.ProductoDetalle.as_view(), name='Detail'),
-    path('producto-new/', views_clases.ProductoCreateView.as_view(), name='New'),
-    path('producto-edit/<int:pk>', views_clases.ProductoUpdateView.as_view(), name='Edit'),
-    path('producto-delete/<int:pk>', views_clases.ProductoDeleteView.as_view(), name='Delete')
-    #path('buscar/', views.buscar, name='buscar')
+    path('producto-list/', views.ProductoListView.as_view(), name='ProductoList'),
+    path('producto-detail/<int:pk>/', views.ProductoDetailView.as_view(), name='ProductoDetail'),
+    path('producto-new/', views.ProductoCreateView.as_view(), name='ProductoNew'),
+    path('producto-edit/<int:pk>', views.ProductoUpdateView.as_view(), name='ProductoEdit'),
+    path('producto-delete/<int:pk>', views.ProductoDeleteView.as_view(), name='ProductoDelete'),
+    path('buscar/', views.buscar, name= 'AlmacenBuscar')
 ]

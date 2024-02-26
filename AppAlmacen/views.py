@@ -1,58 +1,22 @@
-# appstore/views.py
-from django.shortcuts import render, redirect
-from AppAlmacen.forms import ClienteForm, BuscarForm, ProductosForm, ProveedorForm
-from AppAlmacen.models import Cliente, Producto, Proveedor
+from django.shortcuts import render
+from .models import Cliente, Producto
+from AppAlmacen.forms import ClienteForm, BuscarForm
+from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .models import Cliente, Producto
+from django.urls import reverse_lazy
+from users.models import Imagen
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def home(request):
     return render(request, "AppAlmacen/index.html")
 
-def productos(request):
-    if request.method == "POST":
-        miFormulario = ProductosForm(request.POST)
-
-        if miFormulario.is_valid():  # Agregar paréntesis para llamar al método is_valid
-                informacion = miFormulario.cleaned_data
-                
-                producto = Producto(nombre=informacion['nombre'], descripcion=informacion['descripcion'], precio=informacion['precio'])
-                producto.save()
-                # Redirigir a la página de clientes
-                return redirect('AlmacenProductos')
-    else:
-        miFormulario = ProductosForm()
-    return render(request, "AppAlmacen/productos.html", {"form": miFormulario})
-
-def proveedores(request):
-    if request.method == "POST":
-        miFormulario = ProveedorForm(request.POST)
-
-        if miFormulario.is_valid():  # Agregar paréntesis para llamar al método is_valid
-                informacion = miFormulario.cleaned_data
-                
-                proveedor = Proveedor(nombre=informacion['nombre'], direccion=informacion['direccion'], telefono=informacion['telefono'])
-                proveedor.save()
-                # Redirigir a la página de clientes
-                return redirect('AlmacenProveedores')
-    else:
-        miFormulario = ProveedorForm()
-    return render(request, "AppAlmacen/proveedores.html", {"form": miFormulario})
-
-def clientes(request):
-    if request.method == "POST":
-        miFormulario = ClienteForm(request.POST)
-
-        if miFormulario.is_valid():  # Agregar paréntesis para llamar al método is_valid
-                informacion = miFormulario.cleaned_data
-                # Guardar el cliente en la base de datos
-                cliente = Cliente(nombre=informacion['nombre'], email=informacion['email'], telefono=informacion['telefono'])
-                cliente.save()
-                # Redirigir a la página de clientes
-                return redirect('AlmacenClientes')
-                #return render(request, "AppAlmacen/clientes.html")
-    else:
-        # Renderizar el formulario para cargar nuevos clientes
-        miFormulario = ClienteForm()
-    return render(request, "AppAlmacen/clientes.html", {"form": miFormulario})
+@login_required
+def about(request):
+    return render(request, "AppCoder/about.html")
 
 def buscar(request):
         if request.method == "POST":
@@ -64,4 +28,60 @@ def buscar(request):
                   return render(request, "AppAlmacen/resultado_buscar.html", {"formulario":miFormulario, "clientes":cliente})
         else:
             miFormulario = BuscarForm()
-        return render(request, "AppAlmacen/buscar.html", {"formulario": miFormulario})    
+        return render(request, "AppAlmacen/buscar.html", {"formulario": miFormulario})   
+
+# VISTA BASADA EN CLASES - PRODUCTO
+class ProductoListView(LoginRequiredMixin, ListView):
+    model = Producto
+    template_name = "AppAlmacen/Vistas_Clases/producto_list.html"
+
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+class ProductoDetailView(LoginRequiredMixin, DetailView):
+    model = Producto
+    template_name = "AppAlmacen/Vistas_Clases/producto_detail.html"
+class ProductoCreateView(LoginRequiredMixin, CreateView):
+    model = Producto
+    template_name = "AppAlmacen/Vistas_Clases/producto_form.html"
+    success_url = reverse_lazy("List")
+    fields = ["nombre", "descripcion"]
+class ProductoUpdateView(LoginRequiredMixin, UpdateView):
+    model = Producto
+    template_name = "AppAlmacen/Vistas_Clases/producto_edit.html"
+    #success_url = reverse_lazy("List")
+    success_url = "/AppAlmacen/clases/lista/"
+    fields = ["nombre", "descripcion"]
+class ProductoDeleteView(LoginRequiredMixin, DeleteView):
+    model = Producto
+    success_url = reverse_lazy("List")
+    template_name = "AppAlmacen/Vistas_Clases/producto_confirm_delete.html"
+
+
+# VISTA BASADA EN CLASES - CLIENTE
+class ClienteListView(LoginRequiredMixin, ListView):
+    model = Cliente
+    template_name = "AppAlmacen/Vistas_Clases/cliente_list.html"
+
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+class ClienteDetailView(LoginRequiredMixin, DetailView):
+    model = Cliente
+    template_name = "AppAlmacen/Vistas_Clases/cliente_detail.html"
+
+class ClienteCreateView(LoginRequiredMixin, CreateView):
+    model = Cliente
+    template_name = "AppAlmacen/Vistas_Clases/cliente_form.html"
+    success_url = reverse_lazy("List")
+    fields = ["nombre"]
+
+class ClienteUpdateView(LoginRequiredMixin, UpdateView):
+    model = Cliente
+    template_name = "AppAlmacen/Vistas_Clases/cliente_edit.html"
+    #success_url = reverse_lazy("List")
+    success_url = "/AppAlmacen/clases/lista/"
+    fields = ["nombre"]
+class ClienteDeleteView(LoginRequiredMixin, DeleteView):
+    model = Cliente
+    success_url = reverse_lazy("List")
+    template_name = "AppAlmacen/Vistas_Clases/cliente_confirm_delete.html"
