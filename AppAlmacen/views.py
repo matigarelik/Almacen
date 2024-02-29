@@ -37,23 +37,26 @@ class ProductoListView(LoginRequiredMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
+
 class ProductoDetailView(LoginRequiredMixin, DetailView):
     model = Producto
     template_name = "AppAlmacen/Vistas_Clases/producto_detail.html"
+
 class ProductoCreateView(LoginRequiredMixin, CreateView):
     model = Producto
-    template_name = "AppAlmacen/Vistas_Clases/producto_form.html"
-    success_url = reverse_lazy("List")
-    fields = ["nombre", "descripcion"]
+    template_name = "AppAlmacen/Vistas_Clases/producto_create.html"
+    success_url = reverse_lazy("ProductoList")
+    fields = ["nombre", "descripcion", "precio"]
+
 class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     model = Producto
     template_name = "AppAlmacen/Vistas_Clases/producto_edit.html"
-    #success_url = reverse_lazy("List")
-    success_url = "/AppAlmacen/clases/lista/"
-    fields = ["nombre", "descripcion"]
+    success_url = reverse_lazy("ProductoList")
+    fields = ["nombre", "descripcion", "precio"]
+
 class ProductoDeleteView(LoginRequiredMixin, DeleteView):
     model = Producto
-    success_url = reverse_lazy("List")
+    success_url = reverse_lazy("ProductoList")
     template_name = "AppAlmacen/Vistas_Clases/producto_confirm_delete.html"
 
 

@@ -1,0 +1,18 @@
+{% extends "AppAlmacen/padre.html" %}
+
+{% load static %}
+
+
+{% block title %} Inicio {% endblock title %}
+
+{% block contenidoquecambia %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div>{{ form.nombre }}</div>
+    
+    <input type="submit" value="Enviar">
+
+</form>
+
+{% endblock contenidoquecambia %}

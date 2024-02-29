@@ -26,18 +26,10 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'home' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'AlmacenBuscar' %}">Buscar</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="{% url 'ProductoList' %}">Clientes</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Productos
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="productosDropdown">
-                                <li><a class="dropdown-item" href="#">Editar Productos</a></li>
-                                <!-- Agrega otros elementos del submenú aquí si es necesario -->
-                            </ul>
-
+                        <li class="nav-item"><a class="nav-link" href="{% url 'ProductoList' %}">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'ClienteList' %}">Clientes</a></li>
                         {# DROPDOWN PARA LA CUENTA DE USUARIO #}
                         {% if request.user.is_authenticated %}
                             {% if user_avatar %}

@@ -10,8 +10,9 @@
         <div class="card" style="width: 18rem;" >
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-            <h5 class="card-title">{{ curso.nombre }}</h5>
-            <p class="card-text">NOMBRE: {{ producto.nombre }}</p>
+            <h5 class="card-title">{{ producto.nombre }}</h5>
+            <p class="card-text">Descripción: {{ producto.descripcion }}</p>
+            <p class="card-text"><strong>$ {{ producto.precio }}</strong></p>
             <a href="{% url 'ProductoDetail' producto.id %}" class="btn btn-primary">Ver</a>
             <a href="{% url 'ProductoEdit' producto.id %}" class="btn btn-primary">Editar</a>
             <a href="{% url 'ProductoDelete' producto.id %}" class="btn btn-primary">Borrar</a>
@@ -20,6 +21,6 @@
     {% endfor %}
 </div>
 
-<a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'EntregableCreate' %}">Agregar nuevo</a>
+<a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'ProductoCreate' %}">Agregar nuevo</a>
 
 {% endblock contenidoquecambia %}
