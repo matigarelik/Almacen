@@ -9,7 +9,9 @@
 
 <form method="POST">
     {% csrf_token %}
-    <div>{{ form.nombre }}</div>
+    Nombre: <div>{{ form.nombre }}</div>
+    Teléfono: <div>{{ form.telefono }}</div>
+    Email: <div>{{ form.email }}</div>
     
     <input type="submit" value="Enviar">
 

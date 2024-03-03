@@ -27,7 +27,6 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link text-white" href="{% url 'home' %}">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'AlmacenBuscar' %}">Buscar</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'ProductoList' %}">Productos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'ClienteList' %}">Clientes</a></li>
                         {# DROPDOWN PARA LA CUENTA DE USUARIO #}
@@ -65,7 +64,7 @@
             <header class="masthead text-center text-white">
                 <div class="masthead-content">
                     <div class="container px-5">
-                        <h1 class="masthead-heading mb-0">{% block header %}ALMACEN{% endblock header %}</h1>
+                        <h1 class="masthead-heading mb-0">ALMACEN</h1>
                             <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
                     </div>
                 </div>

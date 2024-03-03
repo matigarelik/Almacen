@@ -16,5 +16,8 @@ class ProveedorForm(forms.Form):
     direccion = forms.CharField(max_length=200)
     telefono = forms.CharField(max_length=20)
 
-class BuscarForm(forms.Form):
+class ClienteBuscarForm(forms.Form):
+    nombre = forms.CharField(max_length=100)
+
+class ProductoBuscarForm(forms.Form):
     nombre = forms.CharField(max_length=100)

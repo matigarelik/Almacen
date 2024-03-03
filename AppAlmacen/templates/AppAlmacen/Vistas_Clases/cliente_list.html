@@ -1,17 +1,18 @@
 {% extends "AppAlmacen/padre.html" %}
 {% load static %}
 
-{% block title %} Inicio {% endblock title %}
+
 
 {% block contenidoquecambia %}
-
+<title>{% block titulo %}CLIENTES{% endblock titulo %} </title>
 <div class="row">
     {% for cliente in object_list %}
         <div class="card" style="width: 18rem;" >
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-            <h5 class="card-title">{{ curso.nombre }}</h5>
-            <p class="card-text">CLIENTE: {{ cliente.nombre }}</p>
+            <h5 class="card-title">CLIENTE: {{ cliente.nombre }}</h5>
+            <p class="card-text">{{ cliente.email }}</p>
+            <p class="card-text">{{ cliente.telefono }}</p>
             <a href="{% url 'ClienteDetail' cliente.id %}" class="btn btn-primary">Ver</a>
             <a href="{% url 'ClienteEdit' cliente.id %}" class="btn btn-primary">Editar</a>
             <a href="{% url 'ClienteDelete' cliente.id %}" class="btn btn-primary">Borrar</a>
@@ -20,6 +21,7 @@
     {% endfor %}
 </div>
 
-<a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'CursoCreate' %}">Agregar nuevo</a>
+<a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'ClienteCreate' %}">Agregar nuevo</a>
+<a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'ClienteBuscar' %}">Buscar</a>
 
 {% endblock contenidoquecambia %}

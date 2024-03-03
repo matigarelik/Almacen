@@ -1,0 +1,18 @@
+{% extends "AppAlmacen/padre.html" %}
+{% load static %}
+
+{% block titulo %}Buscar{% endblock titulo %}
+{% block header %}BUSCAR CLIENTES{% endblock header %}
+{% block contenidoquecambia %}
+
+{% block formulario %}
+<h2>Buscar Clientes</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ formulario.as_p }}  {# Renderiza los campos del formulario como párrafos #}
+        <button type="submit">Buscar</button>  {# Usa un botón de envío en lugar de un input #}
+    </form>
+
+    {% endblock formulario %}
+
+    {% endblock contenidoquecambia %}

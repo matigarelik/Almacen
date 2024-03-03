@@ -1,0 +1,23 @@
+{% extends "AppAlmacen/padre.html" %}
+{% load static %}
+
+{% block titulo %}Buscar{% endblock titulo %}
+{% block header %}BUSCAR PRODUCTOS{% endblock header %}
+{% block contenidoquecambia %}
+
+{% block formulario %}
+{% if productos %}
+    <h3>Productos encontrados:</h3>
+    <ul>
+        {% for producto in productos %}
+       <li>Nombre: {{producto.nombre}} </li>
+       <a href="{% url 'ProductoEdit' producto.id %}">Editar</a>  {# Enlace para editar el producto #}
+       <a href="{% url 'ProductoList' %}">Regresar</a>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No se encontraron productos.</p>
+{% endif %}
+
+{% endblock formulario %}
+{% endblock contenidoquecambia %}

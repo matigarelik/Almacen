@@ -11,8 +11,9 @@ urlpatterns += [
     path('cliente-list/', views.ClienteListView.as_view(), name='ClienteList'),
     path('cliente-detail/<int:pk>/', views.ClienteDetailView.as_view(), name='ClienteDetail'),
     path('cliente-edit/<int:pk>/', views.ClienteUpdateView.as_view(), name='ClienteEdit'),
-    path('cliente-delete/<int:pk>/', views.ClienteCreateView.as_view(), name='ClienteDelete'),
+    path('cliente-delete/<int:pk>/', views.ClienteDeleteView.as_view(), name='ClienteDelete'),
     path('cliente-create/', views.ClienteCreateView.as_view(), name='ClienteCreate'),
+    path('cliente-buscar/', views.ClienteBuscar, name= 'ClienteBuscar')
 ]
 # Producto
 urlpatterns += [
@@ -21,5 +22,6 @@ urlpatterns += [
     path('producto-edit/<int:pk>/', views.ProductoUpdateView.as_view(), name='ProductoEdit'),
     path('producto-delete/<int:pk>/', views.ProductoDeleteView.as_view(), name='ProductoDelete'),
     path('producto-create/', views.ProductoCreateView.as_view(), name='ProductoCreate'),
-    path('buscar/', views.buscar, name= 'AlmacenBuscar')
+    path('producto-buscar/', views.ProductoBuscar, name= 'ProductoBuscar')
+    
 ]

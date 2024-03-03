@@ -7,11 +7,12 @@
 
 {% block contenidoquecambia %}
 
-<p>Producto: <i>{{ cliente.nombre }}</i></p>
-<p>Detalles: <i>{{ cliente.email }}</i></p>
+<p>Nombre: <i>{{ cliente.nombre }}</i></p>
+<p>Email: <i>{{ cliente.email }}</i></p>
+<p>Telefono: <i>{{ cliente.telefono }}</i></p>
 
 <p>
-    <a href="{% url 'List' %}">Regresar</a>
+    <a href="{% url 'ClienteList' %}">Regresar</a>
 </p>
 
 {% endblock contenidoquecambia %}

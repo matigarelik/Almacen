@@ -10,8 +10,9 @@
     <form action="" method="POST">
         {% csrf_token %}
 
-        <p>¿Estás seguro que deseas borrar el producto? "{{ object }}"?</p>
+        <p>¿Estás seguro que deseas borrar el producto? "{{ producto.nombre }}"?</p>
         <input type="submit" value="Borrar">
+        <a class="btn btn-secondary" href="{% url 'ProductoList' %}">Cancelar</a>
 
     </form>
 
