@@ -12,11 +12,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def home(request):
-    return render(request, "AppAlmacen/index.html")
+    productos = Producto.objects.all()
+    return render(request, "AppAlmacen/index.html", {"productos": productos})
 
 @login_required
 def about(request):
-    return render(request, "AppCoder/about.html")
+    return render(request, "AppAlmacen/about.html")
 
 # BUSCAR CLIENTES
 def ClienteBuscar(request):

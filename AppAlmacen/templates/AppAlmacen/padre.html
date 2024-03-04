@@ -22,7 +22,6 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
             <div class="container px-5">
-                <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
@@ -33,7 +32,7 @@
                         {% if request.user.is_authenticated %}
                             {% if user_avatar %}
                                 <img src="{{user_avatar}}" alt="" style="height: 40px;width: 40px;">
-                            {% endif %}
+                        {% endif %}
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ request.user.username }}
@@ -61,17 +60,10 @@
             </div>
         </nav>
         <!-- Header-->
-            <header class="masthead text-center text-white">
-                <div class="masthead-content">
-                    <div class="container px-5">
+            <header style="background-image: url({% static 'AppAlmacen/assets/img/almacen.jpg' %}); background-size: cover; background-position: center;">
                         <h1 class="masthead-heading mb-0">ALMACEN</h1>
-                            <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
                     </div>
                 </div>
-                <div class="bg-circle-1 bg-circle"></div>
-                <div class="bg-circle-2 bg-circle"></div>
-                <div class="bg-circle-3 bg-circle"></div>
-                <div class="bg-circle-4 bg-circle"></div>
             </header>
         
             <p>{{ mensaje }}</p>
@@ -82,7 +74,7 @@
     
         <!-- Footer-->
             <footer class="py-5 bg-black">
-                <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2023</p></div>
+                <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Exequiel Matias Garelik 2024</p></div>
             </footer>
             <!-- Bootstrap core JS-->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

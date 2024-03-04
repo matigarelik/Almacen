@@ -12,20 +12,14 @@ def login_request(request):
     msg_login = ""
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-
         if form.is_valid():
-
             usuario = form.cleaned_data.get('username')
             contrasenia = form.cleaned_data.get('password')
-
             user = authenticate(username= usuario, password=contrasenia)
-
             if user is not None:
                 login(request, user)
                 return render(request, "AppAlmacen/index.html")
-
         msg_login = "Usuario o contraseña incorrectos"
-
     form = AuthenticationForm()
     return render(request, "users/login.html", {"form": form, "msg_login": msg_login})
 
@@ -49,24 +43,17 @@ def register(request):
 # Vista de editar el perfil
 @login_required
 def edit(request):
-
     usuario = request.user
-
     if request.method == 'POST':
-
         miFormulario = UserEditForm(request.POST, request.FILES)
-
         if miFormulario.is_valid():
-
             informacion = miFormulario.cleaned_data
-
             if informacion["password1"] != informacion["password2"]:
                 datos = {
                     'first_name': usuario.first_name,
                     'email': usuario.email
                 }
                 miFormulario = UserEditForm(initial=datos)
-
             else:
                 usuario.email = informacion['email']
                 if informacion["password1"]:
@@ -84,7 +71,6 @@ def edit(request):
                 else:
                     avatar.imagen = informacion["imagen"]
                     avatar.save()
-
                 return render(request, "AppAlmacen/index.html")
 
     else:
