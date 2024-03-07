@@ -1,13 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Cliente, Producto
-from AppAlmacen.forms import ClienteForm, ClienteBuscarForm, ProductoBuscarForm
+from .forms import ClienteForm, ClienteBuscarForm, ProductoBuscarForm, ProductosForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Cliente, Producto
-from django.urls import reverse_lazy
 from users.models import Imagen
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -21,28 +20,27 @@ def about(request):
 
 # BUSCAR CLIENTES
 def ClienteBuscar(request):
-        if request.method == "POST":
-             miFormulario = ClienteBuscarForm(request.POST)
-             if miFormulario.is_valid():
-                  info = miFormulario.cleaned_data
-                  cliente = Cliente.objects.filter(nombre__icontains=info["nombre"])
-                  #render(request, "AppAlmacen/clientes.html", {"clientes":clientes})
-                  return render(request, "AppAlmacen/Vistas_Clases/cliente_resultado_buscar.html", {"formulario": miFormulario, "clientes": cliente})
-        else:
-            miFormulario = ClienteBuscarForm()
-        return render(request, "AppAlmacen/Vistas_Clases/cliente_buscar.html", {"formulario": miFormulario})   
+    if request.method == "POST":
+        miFormulario = ClienteBuscarForm(request.POST)
+        if miFormulario.is_valid():
+            info = miFormulario.cleaned_data
+            cliente = Cliente.objects.filter(nombre__icontains=info["nombre"])
+            return render(request, "AppAlmacen/Vistas_Clases/cliente_resultado_buscar.html", {"formulario": miFormulario, "clientes": cliente})
+    else:
+        miFormulario = ClienteBuscarForm()
+    return render(request, "AppAlmacen/Vistas_Clases/cliente_buscar.html", {"formulario": miFormulario})   
 
-#BUSCAR PRODUCTOS
+# BUSCAR PRODUCTOS
 def ProductoBuscar(request):
-        if request.method == "POST":
-             miFormulario = ProductoBuscarForm(request.POST)
-             if miFormulario.is_valid():
-                  info = miFormulario.cleaned_data
-                  producto = Producto.objects.filter(nombre__icontains=info["nombre"])
-                  return render(request, "AppAlmacen/Vistas_Clases/producto_resultado_buscar.html", {"formulario": miFormulario, "productos": producto})
-        else:
-            miFormulario = ProductoBuscarForm()
-        return render(request, "AppAlmacen/Vistas_Clases/producto_buscar.html", {"formulario": miFormulario})   
+    if request.method == "POST":
+        miFormulario = ProductoBuscarForm(request.POST)
+        if miFormulario.is_valid():
+            info = miFormulario.cleaned_data
+            producto = Producto.objects.filter(nombre__icontains=info["nombre"])
+            return render(request, "AppAlmacen/Vistas_Clases/producto_resultado_buscar.html", {"formulario": miFormulario, "productos": producto})
+    else:
+        miFormulario = ProductoBuscarForm()
+    return render(request, "AppAlmacen/Vistas_Clases/producto_buscar.html", {"formulario": miFormulario})   
 
 # VISTA BASADA EN CLASES - PRODUCTO
 class ProductoListView(LoginRequiredMixin, ListView):
@@ -57,18 +55,39 @@ class ProductoCreateView(LoginRequiredMixin, CreateView):
     model = Producto
     template_name = "AppAlmacen/Vistas_Clases/producto_create.html"
     success_url = reverse_lazy("ProductoList")
-    fields = ["nombre", "descripcion", "precio"]
+    form_class = ProductosForm
+
+from django.shortcuts import redirect
 
 class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     model = Producto
     template_name = "AppAlmacen/Vistas_Clases/producto_edit.html"
     success_url = reverse_lazy("ProductoList")
-    fields = ["nombre", "descripcion", "precio"]
+    form_class = ProductosForm
 
+    def form_valid(self, form):
+        # Obtenemos el producto
+        producto = form.save(commit=False)
+        
+        # Verificamos si se ha subido una nueva imagen
+        nueva_imagen = self.request.FILES.get('imagen')
+        if nueva_imagen:
+            # Si ya existe una imagen, la eliminamos
+            if producto.imagen:
+                producto.imagen.delete()
+
+            # Guardamos la nueva imagen
+            producto.imagen = nueva_imagen
+
+        # Guardamos los demás campos del formulario
+        producto.save()
+        
+        return redirect(self.success_url)
 class ProductoDeleteView(LoginRequiredMixin, DeleteView):
     model = Producto
     success_url = reverse_lazy("ProductoList")
     template_name = "AppAlmacen/Vistas_Clases/producto_confirm_delete.html"
+
 
 
 # VISTA BASADA EN CLASES - CLIENTE

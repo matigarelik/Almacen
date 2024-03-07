@@ -1,19 +1,13 @@
 {% extends "AppAlmacen/padre.html" %}
-
 {% load static %}
-
-
-{% block title %} Inicio {% endblock title %}
-
+{% block title %} Editar Producto {% endblock title %}
 {% block contenidoquecambia %}
 
-    <form action="" method="POST">
-        {% csrf_token %}
-
-        {{ form.as_p }}
-        <button input type="submit" class="btn btn-success">Actualizar</button>
-        <a class="btn btn-secondary" href="{% url 'ProductoList' %}">Cancelar</a>
-
-    </form>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Guardar">
+</form>
 
 {% endblock contenidoquecambia %}
+

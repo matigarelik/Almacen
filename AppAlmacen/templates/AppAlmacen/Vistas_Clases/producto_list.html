@@ -8,18 +8,26 @@
 <div class="row">
     {% for producto in object_list %}
         <div class="card" style="width: 18rem;" >
-            <img src="..." class="card-img-top" alt="...">
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+            {% else %}
+                <p>No hay imagen disponible</p>
+            {% endif %}
             <div class="card-body">
-            <h5 class="card-title">{{ producto.nombre }}</h5>
-            <p class="card-text">Descripción: {{ producto.descripcion }}</p>
-            <p class="card-text"><strong>$ {{ producto.precio }}</strong></p>
-            <a href="{% url 'ProductoDetail' producto.id %}" class="btn btn-primary">Ver</a>
-            <a href="{% url 'ProductoEdit' producto.id %}" class="btn btn-primary">Editar</a>
-            <a href="{% url 'ProductoDelete' producto.id %}" class="btn btn-primary">Borrar</a>
+                {% if producto.oferta %}
+                    <p class="card-text">OFERTA!!</p>
+                {% endif %}
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text">Descripción: {{ producto.descripcion }}</p>
+                <p class="card-text"><strong>$ {{ producto.precio }}</strong></p>
+                <a href="{% url 'ProductoDetail' producto.id %}" class="btn btn-primary">Ver</a>
+                <a href="{% url 'ProductoEdit' producto.id %}" class="btn btn-primary">Editar</a>
+                <a href="{% url 'ProductoDelete' producto.id %}" class="btn btn-primary">Borrar</a>
             </div>
         </div>
     {% endfor %}
 </div>
+
 
 <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'ProductoCreate' %}">Agregar nuevo</a>
 <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'ProductoBuscar' %}">Buscar</a>
