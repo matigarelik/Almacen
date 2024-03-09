@@ -15,12 +15,11 @@
             {% endif %}
             <div class="card-body">
                 {% if producto.oferta %}
-                    <p class="card-text">OFERTA!!</p>
+                    <h5 class="card-text"><strong style="color: red;">¡¡¡OFERTA!!</strong></h5>
                 {% endif %}
                 <h5 class="card-title">{{ producto.nombre }}</h5>
                 <p class="card-text">Descripción: {{ producto.descripcion }}</p>
                 <p class="card-text"><strong>$ {{ producto.precio }}</strong></p>
-                <a href="{% url 'ProductoDetail' producto.id %}" class="btn btn-primary">Ver</a>
                 <a href="{% url 'ProductoEdit' producto.id %}" class="btn btn-primary">Editar</a>
                 <a href="{% url 'ProductoDelete' producto.id %}" class="btn btn-primary">Borrar</a>
             </div>

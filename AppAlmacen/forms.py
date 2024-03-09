@@ -26,4 +26,4 @@ class ProductoBuscarForm(forms.Form):
 class ProductosForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['nombre', 'descripcion', 'precio', 'imagen']
+        fields = ['nombre', 'descripcion', 'precio', 'imagen', 'oferta']

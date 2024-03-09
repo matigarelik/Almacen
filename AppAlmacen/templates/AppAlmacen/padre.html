@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         {% load static %}
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -32,28 +33,31 @@
                         {% if request.user.is_authenticated %}
                             {% if user_avatar %}
                                 <img src="{{user_avatar}}" alt="" style="height: 40px;width: 40px;">
-                        {% endif %}
+                            {% endif %}
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ request.user.username }}
                                 </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="{% url 'edit' %}">Editar cuenta</a></li>
-                                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
-                            </ul>
-                        </div>
-
-                        {% else %}
-
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Cuenta
-                                </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="{% url 'login' %}">Inciar Sesión</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'register' %}">Crear cuenta</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'users:edit' %}">Editar cuenta</a></li>
+                                    <li>
+                                        <form action="{% url 'users:logout' %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
+                        {% else %}
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cuenta
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{% url 'users:login' %}">Iniciar Sesión</a></li>
+                                <li><a class="dropdown-item" href="{% url 'users:register' %}">Crear cuenta</a></li>
+                            </ul>
+                        </div>
                         {% endif %}
                     </ul>
                 </div>

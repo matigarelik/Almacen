@@ -10,7 +10,8 @@
     <form action="" method="POST">
         {% csrf_token %}
         {{ formulario.as_p }}  {# Renderiza los campos del formulario como párrafos #}
-        <button type="submit">Buscar</button>  {# Usa un botón de envío en lugar de un input #}
+        <button type="submit">Buscar</button>
+        <a class="btn btn-secondary" href="{% url 'ClienteList' %}">Cancelar</a>
     </form>
 
     {% endblock formulario %}

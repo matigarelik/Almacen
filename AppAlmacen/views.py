@@ -1,22 +1,24 @@
 from django.shortcuts import redirect, render
-from .models import Cliente, Producto
+from .models import Cliente, Producto, ProductoImagen
 from .forms import ClienteForm, ClienteBuscarForm, ProductoBuscarForm, ProductosForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from users.models import Imagen
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import models
 
 
 def home(request):
-    productos = Producto.objects.all()
-    return render(request, "AppAlmacen/index.html", {"productos": productos})
+    productos_oferta = Producto.objects.filter(oferta=True)
+    return render(request, 'AppAlmacen/index.html', {'productos': productos_oferta})
 
 @login_required
 def about(request):
-    return render(request, "AppAlmacen/about.html")
+    productos_oferta = Producto.objects.filter(oferta=True)
+    return render(request, 'AppAlmacen/index.html', {'productos': productos_oferta})
 
 # BUSCAR CLIENTES
 def ClienteBuscar(request):
@@ -47,17 +49,11 @@ class ProductoListView(LoginRequiredMixin, ListView):
     model = Producto
     template_name = "AppAlmacen/Vistas_Clases/producto_list.html"
 
-class ProductoDetailView(LoginRequiredMixin, DetailView):
-    model = Producto
-    template_name = "AppAlmacen/Vistas_Clases/producto_detail.html"
-
 class ProductoCreateView(LoginRequiredMixin, CreateView):
     model = Producto
     template_name = "AppAlmacen/Vistas_Clases/producto_create.html"
     success_url = reverse_lazy("ProductoList")
     form_class = ProductosForm
-
-from django.shortcuts import redirect
 
 class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     model = Producto
@@ -65,24 +61,26 @@ class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("ProductoList")
     form_class = ProductosForm
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['oferta'] = self.object.oferta  # Establecer el estado actual de la oferta
+        return initial
+
     def form_valid(self, form):
-        # Obtenemos el producto
         producto = form.save(commit=False)
         
-        # Verificamos si se ha subido una nueva imagen
-        nueva_imagen = self.request.FILES.get('imagen')
-        if nueva_imagen:
-            # Si ya existe una imagen, la eliminamos
-            if producto.imagen:
-                producto.imagen.delete()
+        # Verificar si el estado de la oferta ha cambiado
+        if producto.oferta != self.object.oferta:
+            if producto.oferta:
+                # El producto se ha puesto en oferta
+                # Aquí puedes realizar acciones adicionales si es necesario
+                pass
+            else:
+                # El producto se ha sacado de oferta
+                # Aquí puedes realizar acciones adicionales si es necesario
+                pass
+        return super().form_valid(form)
 
-            # Guardamos la nueva imagen
-            producto.imagen = nueva_imagen
-
-        # Guardamos los demás campos del formulario
-        producto.save()
-        
-        return redirect(self.success_url)
 class ProductoDeleteView(LoginRequiredMixin, DeleteView):
     model = Producto
     success_url = reverse_lazy("ProductoList")

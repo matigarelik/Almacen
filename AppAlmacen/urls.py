@@ -1,5 +1,5 @@
 # AppAlmacen/urls.py
-from django.urls import path
+from django.urls import path, include
 from AppAlmacen import views
 
 urlpatterns = [
@@ -18,7 +18,6 @@ urlpatterns += [
 # Producto
 urlpatterns += [
     path('producto-list/', views.ProductoListView.as_view(), name='ProductoList'),
-    path('producto-detail/<int:pk>/', views.ProductoDetailView.as_view(), name='ProductoDetail'),
     path('producto-edit/<int:pk>/', views.ProductoUpdateView.as_view(), name='ProductoEdit'),
     path('producto-delete/<int:pk>/', views.ProductoDeleteView.as_view(), name='ProductoDelete'),
     path('producto-create/', views.ProductoCreateView.as_view(), name='ProductoCreate'),

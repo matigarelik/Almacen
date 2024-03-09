@@ -6,5 +6,16 @@
 {% block title %} Login {% endblock title %}
 
 {% block contenidoquecambia %}
-    <p>TE HAS DESLOGUEADO</p>
+
+<form action="{% url 'users:logout' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <section id="productos">
+        <div class="container px-5">
+            <h2 class="display-4">Lo esperamos con mas Ofertas!!!</h2>
+            <div class="row">
+        </div>
+    </section>
+
 {% endblock contenidoquecambia %}
+

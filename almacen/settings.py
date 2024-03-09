@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -103,7 +104,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_URL = '/users/login/'
+LOGIN_URL = '/users/login'
+LOGOUT_URL = '/users/logout'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

@@ -1,27 +1,31 @@
 {% extends "AppAlmacen/padre.html" %}
 {% load static%}
 
+
 {% block title %} Inicio {% endblock title %}
 
 {% block contenidoquecambia %}
     <!-- Content section 1-->
     <section id="productos">
         <div class="container px-5">
-            <h2 class="display-4">Ofertas de Productos</h2>
+            <h2 class="display-4">Productos en OFERTA!!!</h2>
             <div class="row">
                 {% for producto in productos %}
-                    <div class="card" style="width: 18rem;" >
+                    <div class="card" style="width: 18rem;">
                         <div class="card h-100">
                             {% if producto.imagen %}
                             <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-                                {% else %}
-                                <p>No hay imagen disponible</p>
+                            {% else %}
+                            <p>No hay imagen disponible</p>
                             {% endif %}
-                                <div class="card-body">
+                            <div class="card-body">
                                 <h4 class="card-title">{{ producto.nombre }}</h4>
                                 <p class="card-text">{{ producto.descripcion }}</p>
                                 <h5 class="card-price">${{ producto.precio }}</h5>
-                                </div>
+                                {% if producto.oferta %}
+                                <h5 class="card-text"><strong style="color: red;">¡¡¡OFERTA!!</strong></h5>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

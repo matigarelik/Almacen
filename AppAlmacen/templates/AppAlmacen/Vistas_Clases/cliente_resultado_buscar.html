@@ -11,12 +11,13 @@
     <ul>
         {% for cliente in clientes %}
        <li>Nombre: {{cliente.nombre}} | email: {{cliente.email}} | Teléfono: {{cliente.telefono}}  </li>
-       <a href="{% url 'ClienteEdit' cliente.id %}">Editar</a>  {# Enlace para editar el cliente #}
+       <a href="{% url 'ClienteEdit' cliente.id %}">Editar</a>
        <a href="{% url 'ClienteList' %}">Regresar</a>
         {% endfor %}
     </ul>
 {% else %}
     <p>No se encontraron clientes.</p>
+    <a href="{% url 'ClienteBuscar' %}">Regresar</a>
 {% endif %}
 
 {% endblock formulario %}

@@ -7,12 +7,13 @@
 
 {% block formulario %}
 <h2>Buscar Productos</h2>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ formulario.as_p }}  {# Renderiza los campos del formulario como párrafos #}
-        <button type="submit">Buscar</button>  {# Usa un botón de envío en lugar de un input #}
-    </form>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ formulario.as_p }}
+    <button type="submit">Buscar</button>
+    <a class="btn btn-secondary" href="{% url 'ProductoList' %}">Cancelar</a>
+</form>
+{% endblock formulario %}
 
-    {% endblock formulario %}
+{% endblock contenidoquecambia %}
 
-    {% endblock contenidoquecambia %}
